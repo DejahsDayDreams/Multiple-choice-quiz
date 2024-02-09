@@ -1,0 +1,26 @@
+<div >
+    <h2>Question {{currentQuestionIndex + 1}}</h2>
+    <p>{{questions[currentQuestionIndex].question}}</p>
+
+    <ul>
+        <li *ngFor="let option of questions[currentQuestionIndex].options; let i = index">
+            <label>
+                <input type="radio" name="option-group" value="i" (click)="selectAnswer(i)"/>
+                {{option}}
+            </label>
+        </li>
+    </ul>
+
+    <button (click)="prevQuestion()" [disabled]="currentQuestionIndex === 0">Previous</button>
+    <button (click)="nextQuestion()" [disabled]="currentQuestionIndex === questions.length - 1">Next</button>
+
+    <br> <br> <br>
+    <button (click)="submitQuiz()" [disabled]="!allQuestionsAnswered()">Submit</button>
+
+    <div *ngIf="showResult">
+        <h2>Your results</h2>
+        <p> You have answered {{countCorrectAnswers()}} out of {{ questions.length }} questions correctly.</p>
+
+        
+    </div>
+</div>
